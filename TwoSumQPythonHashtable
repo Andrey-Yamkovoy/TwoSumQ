@@ -1,0 +1,20 @@
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        new_dict = dict();
+        for i in range(len(nums)):
+            new_dict[nums[i]] = i
+        result = [0,0];
+        for i in range(0,len(nums),1):
+            compliment = target- nums[i];
+            getElement = new_dict.get(compliment);
+            if getElement and i != getElement:
+                result[0] = i;
+                result[1] = getElement;
+                return result
+        return result
+             
