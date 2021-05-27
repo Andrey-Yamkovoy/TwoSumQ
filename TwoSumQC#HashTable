@@ -1,0 +1,39 @@
+public class Solution {   
+// Fancy modern version C# 7.0
+     public int[] TwoSum(int[] nums, int target) {
+        var map = new Dictionary<int,int>();
+        var result = new int[2];
+         foreach (var (num,i) in nums.WithIndex()) {
+             int compliment = target - num;
+             if (map.TryGetValue(compliment, out var value)){             
+                result[0] = value;
+                result[1] = i;
+                return result;
+             }
+             map[num] = i;
+         }
+        return result;
+    }
+    /*
+    //  Classic version
+    public int[] TwoSum(int[] nums, int target) {
+        var map = new Dictionary<int,int>();
+        var result = new int[2];
+         for (int i = 0; i < nums.Length; i++) {
+             int compliment = target - nums[i];
+             int value;
+             if (map.TryGetValue(compliment, out value)){             
+                result[0] = value;
+                result[1] = i;
+                return result;
+             }
+             map[nums[i]] = i;
+         }
+        return result;
+    }
+    */
+}
+public static class Extensions{
+    public static IEnumerable<(T item, int index)> WithIndex<T>(this IEnumerable<T> self)       
+        => self.Select((item, index) => (item, index)); 
+}
